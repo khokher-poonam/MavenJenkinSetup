@@ -1,5 +1,6 @@
 package com.sel;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -12,7 +13,7 @@ public class SeleniumMavenJenkinSetup {
 
     @BeforeSuite
     public void launchBrowser() {
-        System.setProperty("webdriver.chrome.driver", "C:/Automation/chromedriver.exe");
+       WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -25,6 +26,7 @@ public class SeleniumMavenJenkinSetup {
         String ActualTitle = driver.getTitle();
         String ExpectedTitle = "Google";
         Assert.assertEquals(ActualTitle, ExpectedTitle);
+        System.out.println("The title is:Google");
 
     }
     @AfterSuite
